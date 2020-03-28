@@ -27,6 +27,17 @@ $(document).ready(function(){
     $('#countryname').on('submit', function(e){
         e.preventDefault();
         var country = $('#country').val();
+        var date = [];
+        var datewisecases = [];
+
+        // for(var i = 2; i >= 1; i++){
+        //     date.push(ymd(i));
+
+        // }
+        console.log('hello');
+        console.log(date);
+
+        //country data
         var settings = {
             "async": true,
             "crossDomain": true,
@@ -55,9 +66,51 @@ $(document).ready(function(){
             $('#active-cases').empty();
             $('#total-deaths').empty();
             $('#total-recover').empty();
+
+     //date wise data
+    // for (let index = date.length; index >= 0; index--) {
+
+    //     var settings3 = {
+    //         "async": false,
+    //         "crossDomain": true,
+    //         "url": "https://coronavirus-monitor.p.rapidapi.com/coronavirus/history_by_country_and_date.php?country="+country+"&date="+date[index],
+    //         "method": "GET",
+    //         "headers": {
+    //             "x-rapidapi-host": "coronavirus-monitor.p.rapidapi.com",
+    //             "x-rapidapi-key": "fce61b9f8amshf1817269f8a2a63p1d2382jsn44ad90697b6d"
+    //         }
+    //     }
+        
+    //     $.ajax(settings3).done(function (response) {
+    //         var obj3 = JSON.parse(response);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+    //         datewisecases.push(obj3.stat_by_country[0].total_cases)
+    //     });
+        
+    // }
+//     var ctx = document.getElementById('myChart').getContext('2d');
+//     var chart = new Chart(ctx, {
+//     // The type of chart we want to create
+//     type: 'line',
+
+//     // The data for our dataset
+//     data: {
+//         labels: date ,
+//         datasets: [{
+//             label: 'Total number of cases',
+//             backgroundColor: 'rgb(255, 99, 132)',
+//             borderColor: 'rgb(255, 99, 132)',
+//             data: datewisecases
+//         }]
+//     },
+
+//     // Configuration options go here
+//     options: {}
+// });
+    
         
     });
 
+    //world data
     var settings2 = {
         "async": true,
         "crossDomain": true,
@@ -80,72 +133,76 @@ $(document).ready(function(){
 
     });
 
+    
+
   
   });
 
-  const inputField = document.querySelector('.chosen-value');
-const dropdown = document.querySelector('.value-list');
-const dropdownArray = [... document.querySelectorAll('li')];
-console.log(typeof dropdownArray)
-dropdown.classList.add('open');
-inputField.focus(); // Demo purposes only
-let valueArray = [];
-dropdownArray.forEach(item => {
-  valueArray.push(item.textContent);
-});
+// const inputField = document.querySelector('.chosen-value');
+// const dropdown = document.querySelector('.value-list');
+// const dropdownArray = [... document.querySelectorAll('li')];
+// console.log(typeof dropdownArray)
+// dropdown.classList.add('open');
+// inputField.focus(); // Demo purposes only
+// let valueArray = [];
+// dropdownArray.forEach(item => {
+//   valueArray.push(item.textContent);
+// });
 
-const closeDropdown = () => {
-  dropdown.classList.remove('open');
-}
+// const closeDropdown = () => {
+//   dropdown.classList.remove('open');
+// }
 
-inputField.addEventListener('input', () => {
-  dropdown.classList.add('open');
-  let inputValue = inputField.value.toLowerCase();
-  let valueSubstring;
-  if (inputValue.length > 0) {
-    for (let j = 0; j < valueArray.length; j++) {
-      if (!(inputValue.substring(0, inputValue.length) === valueArray[j].substring(0, inputValue.length).toLowerCase())) {
-        dropdownArray[j].classList.add('closed');
-      } else {
-        dropdownArray[j].classList.remove('closed');
-      }
-    }
-  } else {
-    for (let i = 0; i < dropdownArray.length; i++) {
-      dropdownArray[i].classList.remove('closed');
-    }
-  }
-});
+// inputField.addEventListener('input', () => {
+//   dropdown.classList.add('open');
+//   let inputValue = inputField.value.toLowerCase();
+//   let valueSubstring;
+//   if (inputValue.length > 0) {
+//     for (let j = 0; j < valueArray.length; j++) {
+//       if (!(inputValue.substring(0, inputValue.length) === valueArray[j].substring(0, inputValue.length).toLowerCase())) {
+//         dropdownArray[j].classList.add('closed');
+//       } else {
+//         dropdownArray[j].classList.remove('closed');
+//       }
+//     }
+//   } else {
+//     for (let i = 0; i < dropdownArray.length; i++) {
+//       dropdownArray[i].classList.remove('closed');
+//     }
+//   }
+// });
 
-dropdownArray.forEach(item => {
-  item.addEventListener('click', (evt) => {
-    inputField.value = item.textContent;
-    dropdownArray.forEach(dropdown => {
-      dropdown.classList.add('closed');
-    });
-  });
-})
+// dropdownArray.forEach(item => {
+//   item.addEventListener('click', (evt) => {
+//     inputField.value = item.textContent;
+//     dropdownArray.forEach(dropdown => {
+//       dropdown.classList.add('closed');
+//     });
+//   });
+// })
 
-inputField.addEventListener('focus', () => {
-   inputField.placeholder = 'Type to filter';
-   dropdown.classList.add('open');
-   dropdownArray.forEach(dropdown => {
-     dropdown.classList.remove('closed');
-   });
-});
+// inputField.addEventListener('focus', () => {
+//    inputField.placeholder = 'Type to filter';
+//    dropdown.classList.add('open');
+//    dropdownArray.forEach(dropdown => {
+//      dropdown.classList.remove('closed');
+//    });
+// });
 
-inputField.addEventListener('blur', () => {
-   inputField.placeholder = 'Select country';
-  dropdown.classList.remove('open');
-});
+// inputField.addEventListener('blur', () => {
+//    inputField.placeholder = 'Select country';
+//   dropdown.classList.remove('open');
+// });
 
-document.addEventListener('click', (evt) => {
-  const isDropdown = dropdown.contains(evt.target);
-  const isInput = inputField.contains(evt.target);
-  if (!isDropdown && !isInput) {
-    dropdown.classList.remove('open');
-  }
-});
+// document.addEventListener('click', (evt) => {
+//   const isDropdown = dropdown.contains(evt.target);
+//   const isInput = inputField.contains(evt.target);
+//   if (!isDropdown && !isInput) {
+//     dropdown.classList.remove('open');
+//   }
+// });
+
+var a = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'fhfh', 'fhfjg', 'hello'];
 
 var ctx = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(ctx, {
@@ -154,7 +211,7 @@ var chart = new Chart(ctx, {
 
     // The data for our dataset
     data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'fhfh', 'fhfjg', 'hfhghf'],
+        labels: a ,
         datasets: [{
             label: 'My First dataset',
             backgroundColor: 'rgb(255, 99, 132)',
@@ -166,3 +223,19 @@ var chart = new Chart(ctx, {
     // Configuration options go here
     options: {}
 });
+
+function ymd(i) {
+    var date = new Date();
+
+    var d = new Date(date),
+        fromdate = '' + (d.getMonth() + 1),
+        day = '' + (d.getDate() - i),
+        year = d.getFullYear();
+
+    if (fromdate.length < 2)
+        fromdate = '0' + fromdate;
+    if (day.length < 2)
+        day = '0' + day;
+
+    return [year, fromdate, day].join('-');
+  }
