@@ -23,19 +23,47 @@
   
 //   });
 
+var xlabel = [];
+var ylabel = [];
+
+function getchart(ylabel){
+    var xlabel = ['Total cases', 'Active cases', 'Total deaths', 'Total recovered'];
+
+var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: xlabel ,
+        datasets: [{
+            label: 'My First dataset',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: ylabel
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+
+
+};
+
+
 $(document).ready(function(){
     $('#countryname').on('submit', function(e){
         e.preventDefault();
         var country = $('#country').val();
-        var date = [];
-        var datewisecases = [];
+        var ylabel = [];
 
         // for(var i = 2; i >= 1; i++){
         //     date.push(ymd(i));
 
         // }
         console.log('hello');
-        console.log(date);
 
         //country data
         var settings = {
@@ -59,6 +87,11 @@ $(document).ready(function(){
             $('#active-cases').append(obj.latest_stat_by_country[0].active_cases);
             $('#total-deaths').append(obj.latest_stat_by_country[0].total_deaths);
             $('#total-recover').append(obj.latest_stat_by_country[0].total_recovered);
+            ylabel.push(obj.latest_stat_by_country[0].total_cases);
+            ylabel.push(obj.latest_stat_by_country[0].active_cases);
+            ylabel.push(obj.latest_stat_by_country[0].total_deaths);
+            ylabel.push(obj.latest_stat_by_country[0].total_recovered);
+
         });
             $('#countryid').empty();
             $('#con-name').empty();
@@ -66,6 +99,8 @@ $(document).ready(function(){
             $('#active-cases').empty();
             $('#total-deaths').empty();
             $('#total-recover').empty();
+
+            getchart(ylabel);
 
      //date wise data
     // for (let index = date.length; index >= 0; index--) {
@@ -202,27 +237,7 @@ $(document).ready(function(){
 //   }
 // });
 
-var a = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'fhfh', 'fhfjg', 'hello'];
 
-var ctx = document.getElementById('myChart').getContext('2d');
-var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'line',
-
-    // The data for our dataset
-    data: {
-        labels: a ,
-        datasets: [{
-            label: 'My First dataset',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45, 10, 20, 15 ]
-        }]
-    },
-
-    // Configuration options go here
-    options: {}
-});
 
 function ymd(i) {
     var date = new Date();
