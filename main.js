@@ -86,10 +86,10 @@ $(document).ready(function(){
             $('#active-cases').append(obj.latest_stat_by_country[0].active_cases);
             $('#total-deaths').append(obj.latest_stat_by_country[0].total_deaths);
             $('#total-recover').append(obj.latest_stat_by_country[0].total_recovered);
-            ylabel.push(parseInt(obj.latest_stat_by_country[0].total_cases));
-            ylabel.push(parseInt(obj.latest_stat_by_country[0].active_cases));
-            ylabel.push(parseInt(obj.latest_stat_by_country[0].total_deaths));
-            ylabel.push(parseInt(obj.latest_stat_by_country[0].total_recovered));
+            ylabel.push(parseInt(removeCommas(obj.latest_stat_by_country[0].total_cases)));
+            ylabel.push(parseInt(removeCommas(obj.latest_stat_by_country[0].active_cases)));
+            ylabel.push(parseInt(removeCommas(obj.latest_stat_by_country[0].total_deaths)));
+            ylabel.push(parseInt(removeCommas(obj.latest_stat_by_country[0].total_recovered)));
             chart.data.datasets[0].label = obj.latest_stat_by_country[0].country_name;
             chart.data.datasets[0].data = ylabel;
             chart.update();
@@ -252,4 +252,8 @@ function ymd(i) {
         day = '0' + day;
 
     return [year, fromdate, day].join('-');
+  }
+
+  function removeCommas(str) {
+      return(str.replace(/,/g,''));
   }
