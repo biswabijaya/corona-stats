@@ -3,4 +3,4 @@
 # corona-stats
 A website to check different statistics of the deadly virus corona country wise.
 
-https://codepen.io/biswabijaya/pen/RwPdjxa
+Project Live at https://corona-stats.biswabijaya.now.sh/
