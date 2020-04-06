@@ -1,34 +1,7 @@
-// $.getJSON("http://api.openweathermap.org/data/2.5/weather?q=mumbai&appid=c3278a9dddcbf142a4c4f96117e94251", function(data){
-//     console.log(data);
-
-// });
-
-// // var data = api.openweathermap.org/data/2.5/weather?q=mumbai&appid=c3278a9dddcbf142a4c4f96117e94251;
-
-// $(document).ready(function(){
-//     $('#cityname').on('submit', function(e){
-//         e.preventDefault();
-//         var city = $('#city').val();
-//         console.log(city);
-//         $.ajax({
-//             url:"http://api.openweathermap.org/data/2.5/weather?q=" +city+ "&appid=c3278a9dddcbf142a4c4f96117e94251",
-//             type: "GET",
-//             dataType: 'json',
-//             success: function(data) {
-//                 console.log(data);
-//             }
-//         });
-//     });
-
-
-//   });
-
-
-
 var xlabel = [];
 var ylabel = [];
+var indianstate = [];
 
-console.log(ylabel);
 
 
 var xlabel = ['Total cases', 'Active cases', 'Total deaths', 'Total recovered'];
@@ -167,76 +140,48 @@ $(document).ready(function(){
 
     });
 
+    var settings3 = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://corona-virus-world-and-india-data.p.rapidapi.com/api_india",
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "corona-virus-world-and-india-data.p.rapidapi.com",
+            "x-rapidapi-key": "fce61b9f8amshf1817269f8a2a63p1d2382jsn44ad90697b6d"
+        }
+    }
 
+    $.ajax(settings3).done(function (response) {  
+        
+        for(p in response.state_wise){
+            indianstate.push({
+                name: response.state_wise[p].state,
+                active: response.state_wise[p].active ,
+                confirmed:response.state_wise[p].confirmed,
+                deaths:response.state_wise[p].deaths,
+                recovered:response.state_wise[p].recovered
+            });
+ 
+        }
+        i=1;
+        content = '';
 
+        for (p in indianstate) { 
+          }
+
+          for (let index = 0; index < indianstate.length -1; index++) {
+            content += '<tr><td>'+indianstate[index].name+'</td>'+'<td>'+indianstate[index].active+'</td>'+'<td>'+indianstate[index].confirmed+'</td>'+'<td>'+indianstate[index].deaths+'</td>'+'<td>'+indianstate[index].recovered+'</td></tr>';                    
+              
+          }
+          
+          
+          $('#tbody').append(content);
+            console.log(indianstate);
+        
+
+    }); 
 
   });
-
-// const inputField = document.querySelector('.chosen-value');
-// const dropdown = document.querySelector('.value-list');
-// const dropdownArray = [... document.querySelectorAll('li')];
-// console.log(typeof dropdownArray)
-// dropdown.classList.add('open');
-// inputField.focus(); // Demo purposes only
-// let valueArray = [];
-// dropdownArray.forEach(item => {
-//   valueArray.push(item.textContent);
-// });
-
-// const closeDropdown = () => {
-//   dropdown.classList.remove('open');
-// }
-
-// inputField.addEventListener('input', () => {
-//   dropdown.classList.add('open');
-//   let inputValue = inputField.value.toLowerCase();
-//   let valueSubstring;
-//   if (inputValue.length > 0) {
-//     for (let j = 0; j < valueArray.length; j++) {
-//       if (!(inputValue.substring(0, inputValue.length) === valueArray[j].substring(0, inputValue.length).toLowerCase())) {
-//         dropdownArray[j].classList.add('closed');
-//       } else {
-//         dropdownArray[j].classList.remove('closed');
-//       }
-//     }
-//   } else {
-//     for (let i = 0; i < dropdownArray.length; i++) {
-//       dropdownArray[i].classList.remove('closed');
-//     }
-//   }
-// });
-
-// dropdownArray.forEach(item => {
-//   item.addEventListener('click', (evt) => {
-//     inputField.value = item.textContent;
-//     dropdownArray.forEach(dropdown => {
-//       dropdown.classList.add('closed');
-//     });
-//   });
-// })
-
-// inputField.addEventListener('focus', () => {
-//    inputField.placeholder = 'Type to filter';
-//    dropdown.classList.add('open');
-//    dropdownArray.forEach(dropdown => {
-//      dropdown.classList.remove('closed');
-//    });
-// });
-
-// inputField.addEventListener('blur', () => {
-//    inputField.placeholder = 'Select country';
-//   dropdown.classList.remove('open');
-// });
-
-// document.addEventListener('click', (evt) => {
-//   const isDropdown = dropdown.contains(evt.target);
-//   const isInput = inputField.contains(evt.target);
-//   if (!isDropdown && !isInput) {
-//     dropdown.classList.remove('open');
-//   }
-// });
-
-
 
 function ymd(i) {
     var date = new Date();
